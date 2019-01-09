@@ -1,0 +1,17 @@
+﻿@model MasterpieceStore.Domain.Entities.Cart
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+<div class="navbar-right">
+    @Html.ActionLink("Shopping bag", "Index", "Cart",
+ new { returnUrl = Request.Url.PathAndQuery },
+ new { @class = "fas fa-shopping-bag" })
+</div>
+
+<div class="navbar-text navbar-right">
+    <b>Your cart:</b>
+    @Model.Lines.Sum(x => x.Quantity) item(s),
+    @Model.ComputeTotalValue().ToString("c")
+</div>
+
+
+<div><a href="@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })"><i class="fas fa-shopping-bag"></i></a></div>

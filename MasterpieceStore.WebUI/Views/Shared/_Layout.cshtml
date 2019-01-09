@@ -1,0 +1,50 @@
+﻿@using System.Web
+@using System.Security.Principal
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    @*<link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />*@
+    <link rel="stylesheet" href="~/Content/mybootstrap.css">
+    <link rel="stylesheet" href="~/Content/SupaStyling.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <title>@ViewBag.Title</title>
+</head>
+<body id="myPage">
+
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href="#myPage"><i class="fas fa-palette" style="font-size: 30px"></i></a>
+        <ul class="nav navbar-nav">
+            <li> <a href="#about" >ABOUT</a></li>
+            <li><a href="#services" >SERVICES</a></li>
+            <li><a href="#portfolio">GALLERY</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="@Url.Action( "Logout", "Account")">Sign Out</a></li>
+                }else
+                {
+                <li><a href="@Url.Action("Login", "Account", new { returnUrl = Request.Url.PathAndQuery })"><i class="far fa-user-circle" style="font-size: 22px"></i>Log In</a></li>
+              
+                }
+
+                <li><a href="@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })"><i class="fas fa-shopping-bag" style="font-size: 22px; padding-right: 15px; margin: auto"></i></a></li>
+            </ul>
+        </div>
+      
+    </nav>
+
+
+    <div>
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
